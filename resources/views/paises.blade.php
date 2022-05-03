@@ -14,30 +14,30 @@
     <table class="table table-striped table-dark">
         <thead>
             <tr>
-                <th>Pais</th>
-                <th>Capital</th>
-                <th>Moneda</th>
-                <th>Población</th>
-                <th>Ciudades</th>
+                <th class="text-muted">Pais</th>
+                <th class="text-success">Capital</th>
+                <th class="text-danger">Moneda</th>
+                <th class="text-primary">Población</th>
+                <th class="text-light">Ciudades</th>
             </tr>
         </thead>
         <tbody>
             @foreach($paises as $pais => $infopai)
             <tr>
-                <td rowspan = "{{ count($infopai['Ciudades']) }}">
+                <td class="text-muted" rowspan = "{{ count($infopai['Ciudades']) }}">
                     {{ $pais }}
                 </td>
-                <td rowspan = "{{ count($infopai['Ciudades']) }}">
+                <td class="text-success" rowspan = "{{ count($infopai['Ciudades']) }}">
                     {{ $infopai["Capital"] }}
                 </td>
-                <td rowspan = "{{ count($infopai['Ciudades']) }}">
+                <td class="text-danger" rowspan = "{{ count($infopai['Ciudades']) }}" class="text-danger">
                     {{ $infopai["Moneda"] }}
                 </td>
-                <td rowspan = "{{ count($infopai['Ciudades']) }}">
+                <td class="text-primary" rowspan = "{{ count($infopai['Ciudades']) }}" class="text-white">
                     {{ $infopai["Población"] }}
                 </td>
                 @foreach($infopai ["Ciudades"] as $ciudad)
-                <th>
+                <th class="table-warning" class="text-danger">
                     {{ $ciudad }}
                 </th>
             </tr>
