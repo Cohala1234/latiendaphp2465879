@@ -44,10 +44,12 @@ class ProductoController extends Controller
     {
         //definir reglas
         $reglas = [
-            "nombre" => 'required|alpha',
+            "nombre" => 'required|alpha|unique:productos,nombre',
             "desc" => 'required|min:10|max:50',
             "precio" => 'required|numeric',
-            "marca" => 'required'
+            "marca" => 'required',
+            "categoria" => 'required',
+            "imagen" => 'required|image'
         ];
         //mensajes personalizados
         $mensajes = [
@@ -55,7 +57,9 @@ class ProductoController extends Controller
             "numeric" => "Permitido solo numeros",
             "alpha" => "Permitido solo letras",
             "min" => "Permitido minimo 10 letras",
-            "max" => "Permitido maximo 50 letras"
+            "max" => "Permitido maximo 50 letras",
+            "image" => "Permitido solo imagen",
+            "unique" => "El nombre ya existe"
         ];
 
         //crear el objeto
@@ -68,6 +72,14 @@ class ProductoController extends Controller
         }
         else
         {
+            //asignar a la variable nombre_archivo
+            $nombre_archivo = $r->imagen->getClientOriginalName();
+            $archivo = $r->imagen;
+
+            //mover al archivo en la carpeta publica
+            $ruta = public_path().'/img';
+            $archivo->move($ruta, $nombre_archivo);
+
             //validacion correcta
             //creamos entidad producto
             $p = new Producto;
@@ -75,6 +87,7 @@ class ProductoController extends Controller
             $p->nombre = $r->nombre;
             $p->desc = $r->desc;
             $p->precio = $r->precio;  
+            $p->imagen = $nombre_archivo; 
             $p->marca_id = $r->marca;
             $p->categoria_id = $r->categoria;
             //grabar el nuevo producto 

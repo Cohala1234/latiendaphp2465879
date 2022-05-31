@@ -5,7 +5,7 @@
     <h1 class="blue-grey-text text-lighten-3">Nuevo Producto</h1>
 </div>
 <div class="row">
-    <form class='col s8' method="post" action="{{ route('productos.store') }}">
+    <form class='col s8' method="post" action="{{ url('productos') }}" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="input-field col s8">
@@ -33,7 +33,7 @@
 
         <div class="row">
             <div class="col s8 input-field">
-                <select name="marca" id="marca">
+                <select name="marca" id="marca" value="{{ old('marca') }}">
                     <option value="">Seleccione la marca..</option>
                     @foreach($marcas as $marca)
                         <option value="{{ $marca->id }}">{{ $marca->nombre }}</option>
@@ -53,7 +53,7 @@
                     @endforeach
                 </select>
                 <label for="categoria">Categoria</label>
-                <span class="red-text">{{ $errors->first('marca') }}</span>
+                <span class="red-text">{{ $errors->first('categoria') }}</span>
             </div>
         </div>
 
@@ -66,6 +66,7 @@
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text">
                 </div>
+                <span class="red-text">{{ $errors->first('imagen') }}</span>
             </div>
         </div>
 
