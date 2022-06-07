@@ -16,9 +16,11 @@ class ProductoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-        echo "aqui va a ir el catalogo de productos";
+    {   
+        //Seleccion de todos los productos
+        $productos = Producto::all();
+        //Mostrar la vista del catalogo llevandole la vista de productos
+        return view('productos.index')->with('productos', $productos);
     }
 
     /**
@@ -49,7 +51,7 @@ class ProductoController extends Controller
             "precio" => 'required|numeric',
             "marca" => 'required',
             "categoria" => 'required',
-            "imagen" => 'required|image'
+            "imagen" => 'image'
         ];
         //mensajes personalizados
         $mensajes = [
@@ -105,8 +107,10 @@ class ProductoController extends Controller
      */
     public function show($producto)
     {
-        //
-        echo "aqui va la info del producto cuyo id es: $producto";
+        //seleccionar el producto con id
+        $producto = Producto::find($producto);
+        //mostrar vista de detalles llevandole el producto seleccionado
+        return view('productos.details')->with('producto', $producto);
     }
 
     /**
