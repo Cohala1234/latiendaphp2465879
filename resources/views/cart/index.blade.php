@@ -35,6 +35,6 @@
         </form>
     </div>
     @else
-    <strong>No hay productos agregados en el carrito</strong>
+    <strong>No hay productos agregados al carrito</strong>
     @endif
 @endsection
