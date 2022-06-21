@@ -35,7 +35,7 @@
                         @else
                             <img src="{{ asset('img/'.$producto->imagen) }}" alt="">
                         @endif
-                        <span class="card-title">{{ $producto->nombre }}</span>
+                        <span class="card-title" style="color: red">{{ $producto->nombre }}</span>
                     </div>
                     <div class="card-content">
                         <p>{{ $producto->desc }}</p>
