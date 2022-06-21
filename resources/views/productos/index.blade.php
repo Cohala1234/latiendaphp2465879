@@ -1,6 +1,14 @@
 @extends('layouts.menu')
 
 @section('contenido')
+@if(session('mensajito'))
+    <div class="row">
+        <strong>
+            {{ session('mensajito') }}
+            <a href="{{ route('cart.index') }}">Ir al carrito</a>
+        </strong>
+    </div>
+@endif
     <div class="row">
         <style>
             .row

@@ -13,7 +13,8 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        //mostrar la variable de session que se llama 'cart'
+        return view('cart.index');
     }
 
     /**
@@ -35,9 +36,31 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
-        echo "<pre>";
-            var_dump($request->all());
-        echo "</pre>";
+       $producto = [
+        [
+        "nombre" => $request->prod_nom,
+        "id" => $request->prod_id,
+        "cantidad" => $request->cantidad,
+        "precio" => $request->precio
+        ]];
+       if(!session('cart'))
+       {
+            //en caso de que no exista la variable
+            //crear estado de session 'cart'
+            $auxiliar[] = $producto;
+            session(['cart' => $auxiliar]);
+       }
+       else
+       {
+            //en caso de que exista la variable se extrae el contenido de session 'cart'
+            $auxiliar = session('cart');
+            //agregar al nuevo item del arreglo
+            $auxiliar[] = $producto;
+            //
+            session(['cart' => $auxiliar]);
+       }
+
+       return redirect('productos')->with('mensajito', 'Producto añadido en el carrito');
     }
 
     /**
@@ -82,6 +105,8 @@ class CartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //eliminar la session 'cart'
+        session()->forget('cart');
+        return redirect('cart')->with('mensajito', 'Carrito eliminado');
     }
 }
